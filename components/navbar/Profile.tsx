@@ -1,6 +1,4 @@
-
 import { getAuthSession } from '@/app/api/auth/[...nextauth]/route'
-
 import Image from 'next/image'
 import React from 'react'
 
@@ -10,7 +8,6 @@ type Props = {}
 const Profile = async (props: Props) => {
 
   const session = await getAuthSession()
-// console.log(session?.user?.name);
 
 
 

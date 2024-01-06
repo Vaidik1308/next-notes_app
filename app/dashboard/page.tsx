@@ -4,12 +4,13 @@ import { redirect } from 'next/navigation'
 import React from 'react'
 import { BiPlus } from 'react-icons/bi'
 import Link from 'next/link'
-import { getAuthSession } from '../api/auth/[...nextauth]/route'
+import { authOptions } from '@/lib/authOptions'
+import { getServerSession } from 'next-auth'
 
 type Props = {}
 
 const Dashboard = async (props: Props) => {
-  const session = await getAuthSession()
+  const session = await getServerSession(authOptions)
   
   
     if(!session){

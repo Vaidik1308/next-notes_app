@@ -25,9 +25,9 @@ const Note = ({title,content,createdAt,bgColor,id}:Note) => {
             </h2>
 
             {/* //rich text editor */}
-            <div className=' text-[14px] w-[78%]'>
+            <p className=' text-[14px] w-[78%]'>
                 {content.length > 100 ? `${content.substring(0,100)}...` : content}
-            </div>
+            </p>
         </div>
         {/* <div className='flex flex-wrap w-[85%] gap-2'>
             <Link className='bg-[#F0FFC6] text-[0.8rem] font-bold rounded-[8px] px-3 py-1' href={"/"}>

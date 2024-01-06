@@ -1,5 +1,4 @@
 'use server'
-import { getServerSession } from 'next-auth';
 import React from 'react'
 import { redirect } from 'next/navigation';
 import LogInSignIn from '@/components/auth/LogInSignIn';

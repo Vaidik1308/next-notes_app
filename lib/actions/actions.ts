@@ -1,8 +1,8 @@
 'use server'
-import { getAuthSession } from "@/app/api/auth/[...nextauth]/route"
 import prisma from "@/prisma"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
+import { getAuthSession } from "@/app/api/auth/[...nextauth]/route"
 
 
 export const getNotes = async () => {
@@ -12,7 +12,7 @@ export const getNotes = async () => {
         const notes = await prisma.note.findMany({
             where:{
                 authorEmail:session?.user?.email as string
-            },
+            },    
             orderBy:{
                 createdAt:"desc"
             }

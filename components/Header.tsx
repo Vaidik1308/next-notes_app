@@ -1,5 +1,4 @@
-
-import {  getAuthSession } from '@/app/api/auth/[...nextauth]/route'
+import { getAuthSession } from '@/app/api/auth/[...nextauth]/route'
 import React from 'react'
 
 type Props = {}

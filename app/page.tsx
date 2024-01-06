@@ -1,7 +1,6 @@
-
 import Image from "next/image";
-import { getAuthSession } from "./api/auth/[...nextauth]/route";
 import Link from "next/link";
+import { getAuthSession } from "./api/auth/[...nextauth]/route";
 
 
 
@@ -29,7 +28,7 @@ export default async function Home() {
             <div className="relative h-[50px] w-[50px]">
               <Image fill className="rounded-[50%] object-cover" alt="profilepic" src={profilePic} />
             </div>
-            <Link href={"/dashboard"} className="flex justify-center items-center bg-white px-6 hover:bg-black hover:text-white transition w-fit rounded-sm text-[16px] font-semibold py-[2px] ">Dashboard</Link>
+            <Link href={"/dashboard"} className="flex justify-center items-center bg-black px-6 hover:bg-white hover:text-black text-white transition w-fit rounded-sm text-[16px] font-semibold py-[2px] ">Dashboard</Link>
           </div>
         )}
       </div>

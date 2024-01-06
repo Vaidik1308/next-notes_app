@@ -1,4 +1,4 @@
-
+'use client'
 import { addNote } from '@/lib/actions/actions'
 import React from 'react'
 import { BiBookAdd } from 'react-icons/bi'
