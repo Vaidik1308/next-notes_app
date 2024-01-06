@@ -1,12 +1,22 @@
-
-import React from 'react'
+'use client'
+import { singleNote, updateNote } from '@/lib/actions/actions'
+import { NoteBody, NoteData } from '@/types'
+import React, { useState } from 'react'
 import { BiBookAdd } from 'react-icons/bi'
 
 
-type Props = {}
 
-const EditNote = () => {
+const EditNote = ({note,noteId}:{note:NoteBody,noteId:string}) => {
   
+    const [title,setTitle] = useState( note.title || "")
+    const [content,setContent] = useState(note.content || "")
+    
+
+  
+  
+  if(!note){
+    throw new Error("invalid noteId")
+  }
   
   return (
     
@@ -16,22 +26,23 @@ const EditNote = () => {
               <BiBookAdd/>
               <h2 className='font-bold'>Note Page</h2>
             </div>
-            <form action="" className='flex flex-col gap-4 w-full  p-4 rounded-lg' >
+            <form action={updateNote} className='flex flex-col gap-4 w-full  p-4 rounded-lg' >
+              <input type="text" name="id" value={note.id} hidden />
               <input 
                 placeholder='Heading'
                 name='title'
                 type="text"
                 
-                // value={title}
-                // onChange={(e) => setTitle(e.target.value)}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 className='rounded-md bg-[#014C42] p-1 px-2 w-full text-white text-[45px] outline-none'
               />
               <textarea 
                 placeholder='content'
                 name='content'
                 className='rounded-md p-1 px-2 text-white bg-[#014C42] outline-none min-h-[20vh]'
-                // onChange={(e) => setDesc(e.target.value)}
-                // value={desc}
+                onChange={(e) => setContent(e.target.value)}
+                value={content}
                 rows={4}
               />
               <div className='w-full flex jus'>

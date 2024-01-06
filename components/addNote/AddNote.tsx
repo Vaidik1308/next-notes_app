@@ -11,13 +11,13 @@ const AddNote = () => {
   
   return (
     
-        <div className='flex-[1.2] shadow-lg bg-[#A8DF8E] min-h-screen p-3'>
+        <div className='flex-[1.2] shadow-lg bg-[#014C42] min-h-screen p-3'>
         <span className='flex flex-col items-start gap-2 text-[20px]'>
             <div className='flex items-center gap-2 text-[25px] text-white'>
               <BiBookAdd/>
               <h2 className='font-bold'>New Note</h2>
             </div>
-            <form action={addNote} className='flex flex-col gap-4 w-full bg-[#014C42] p-4 rounded-lg' >
+            <form action={addNote} className='flex flex-col gap-4 w-full  p-4 rounded-lg' >
               <input 
                 placeholder='Heading'
                 name='title'

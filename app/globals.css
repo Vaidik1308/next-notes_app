@@ -74,3 +74,18 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+	border: 2px solid #555555;
+  border-radius: 25px;
+}

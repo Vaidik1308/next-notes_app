@@ -3,6 +3,7 @@ import prisma from "@/prisma"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import { getAuthSession } from "@/app/api/auth/[...nextauth]/route"
+import { NoteBody } from "@/types"
 
 
 export const getNotes = async () => {
@@ -23,6 +24,39 @@ export const getNotes = async () => {
         throw new Error("error in fetching the notes")
         
     }
+
+    
+}
+
+export const singleNote = async (id:string) => {
+    const note = await prisma.note.findUnique({
+        where:{id}
+    })
+    return note
+} 
+
+export const updateNote = async (formData:FormData) => {
+    const updatedData = {
+        content: formData.get("content") as string,
+        title: formData.get("title") as string,
+        id: formData.get("id") as string
+    }
+
+    try{
+        const id = updatedData.id
+        await prisma.note.update({
+            where:{id},
+            data:{
+                title:updatedData.title,
+                content:updatedData.content
+            }
+        })
+    }catch(error){
+        console.log(error)
+    }
+
+    revalidatePath('/dashboard')
+    redirect('/dashboard')
 
     
 }
@@ -59,4 +93,18 @@ export const addNote = async (formData:FormData) => {
     redirect('/dashboard')
 
 
+}
+
+export const deleteNote = async (id:string) => {
+    try{
+        await prisma.note.delete({
+            where:{id}
+        })
+    }catch(error){
+        console.log(error);
+        
+    }
+
+    revalidatePath('/dashboard')
+    // redirect('/dashboard')
 }

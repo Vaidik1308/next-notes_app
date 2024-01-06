@@ -24,8 +24,8 @@ const Notes = async (props: Props) => {
   return (
     <section className='flex flex-col flex-[2] gap-2 px-6 mt-2 min-h-fit max-h-[70vh]'>
     <span className='text-black font-bold mb-2 flex items-center gap-1'>
-      <GiNotebook className="text-[24px]"/>
-      <h2 className='text-[20px]'>My Notes</h2>  
+      <GiNotebook className="text-[35px]"/>
+      <h2 className='text-[35px]'>My Notes</h2>  
     </span>
     <div className=" w-full  max-h-[70vh] overflow-y-auto min-h-fit p-2  flex flex-wrap gap-8 mx-auto  justify-start">
     {
