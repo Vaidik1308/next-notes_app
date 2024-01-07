@@ -9,7 +9,7 @@ type Props = {}
 const Navbar = (props: Props) => {
   
   return (
-    <div className={' rounded-b-[8px]  bg-[#014C42]  flex-[1]  flex  items-start max-h-[150vh] pt-2 flex-col gap-4 justify-start'} >
+    <div className={' flex  rounded-b-[8px]  sm:bg-[#014C42]  flex-[1]    items-start max-h-[150vh] pt-2 flex-col gap-4 justify-start'} >
         <Profile/>
         <Link href={"/"} className='h-[250px] w-[250px]  relative '>
             <Image

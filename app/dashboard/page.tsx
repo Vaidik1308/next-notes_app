@@ -20,7 +20,7 @@ const Dashboard = async (props: Props) => {
     <section className='text-black flex gap-4 min-h-fit relative'>
         <Notes/>
 
-        <Link href={"/dashboard/create-note"} className='fixed right-5 text-[45px] bg-white p-3 rounded-[50%] bottom-5  '>
+        <Link href={"/dashboard/create-note"} className='fixed right-5 text-[45px] bg-white p-3 rounded-[50%] bottom-5  z-10'>
         <BiPlus/>
         </Link>
         {/* <AddNote/> */}

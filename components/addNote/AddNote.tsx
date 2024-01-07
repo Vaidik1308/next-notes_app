@@ -33,7 +33,7 @@ const AddNote = () => {
                 className='rounded-md p-1 px-2 text-white bg-[#014C42] outline-none min-h-[20vh]'
                 // onChange={(e) => setDesc(e.target.value)}
                 // value={desc}
-                rows={4}
+                rows={10}
               />
               <div className='w-full flex jus'>
               <button  type='submit' className=' rounded-sm py-1 w-fit bg-[#FBF9F1] p-1 px-4 text-black'>

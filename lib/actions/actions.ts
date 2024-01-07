@@ -3,7 +3,7 @@ import prisma from "@/prisma"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import { getAuthSession } from "@/app/api/auth/[...nextauth]/route"
-import { NoteBody } from "@/types"
+import { NoteBody, NoteData } from "@/types"
 
 
 export const getNotes = async () => {
@@ -33,7 +33,7 @@ export const getNotes = async () => {
     
 }
 
-export const singleNote = async (id:string) => {
+export const singleNote = async (id:string):NoteBody => {
     const note = await prisma.note.findUnique({
         where:{id}
     })

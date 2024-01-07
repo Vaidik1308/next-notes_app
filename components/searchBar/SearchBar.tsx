@@ -14,7 +14,7 @@ const SearchBar = (props: Props) => {
             name="" 
             id="" 
             placeholder='Search Here..'
-            className='w-full bg-transparent outline-none'
+            className='w-full bg-[#F67470] sm:bg-transparent sm:tex outline-none sm:text-gray-400 text-black'
         />
     </div>
   )

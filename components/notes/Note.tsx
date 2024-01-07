@@ -38,7 +38,7 @@ const Note = ({title,content,createdAt,bgColor,id}:Note) => {
     useOnClickOutside(deleteRef, () => setShow(false))
     
   return (
-    <section  className={` shadow-lg mb-8 note w-[275px] hover:animate-pulse transition px-3 py-1  h-fit min-h-[25vh] flex flex-col gap-3 rounded-[15px] ${bgColor}  text-black`}>
+    <section  className={` shadow-lg mb-8 note lg:w-[340px] xl:w-[260px] hover:animate-pulse transition px-3 py-1  h-fit min-h-[25vh] flex flex-col gap-3 rounded-[15px] ${bgColor}  text-black md:w-[270px] md-1:w-[95%] sm:w-[95%] w-[95%] `}>
         <div className='w-full flex justify-between items-center'>
             <span className=' text-[0.8rem] text-gray-700'>{createdAt.toString().substring(0,10)}</span>  
             <span className="text-2xl text-gray-500 hover:text-black transition  relative reference" ref={deleteRef}>
@@ -55,7 +55,7 @@ const Note = ({title,content,createdAt,bgColor,id}:Note) => {
         </div>
         <Link href={`/dashboard/${id}`} className='flex flex-col gap-3'>
             <h2 className='font-bold text-[22px] leading-5 break-words'>
-            {title.length > 8 ? `${title.substring(0,8)}...` : title}
+            {title.length > 18 ? `${title.substring(0,18)}...` : title}
             </h2>
 
             {/* //rich text editor */}
