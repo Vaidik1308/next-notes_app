@@ -59,6 +59,7 @@ model Note {
   title  String
   content String
   createdAt DateTime @default(now())
+  updatedAt   DateTime?  @updatedAt
   authorEmail String
   author      User @relation(fields:[authorEmail],references:[email])
 }

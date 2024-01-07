@@ -9,5 +9,6 @@ export type NoteBody = {
     title:string,
     content:string,
     authorEmail:string,
-    createdAt:Date
+    createdAt:Date,
+    updatedAt:Date | null,
 }

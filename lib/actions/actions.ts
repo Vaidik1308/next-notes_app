@@ -14,9 +14,14 @@ export const getNotes = async () => {
             where:{
                 authorEmail:session?.user?.email as string
             },    
-            orderBy:{
-                createdAt:"desc"
-            }
+            orderBy:[
+                {
+                    updatedAt:"desc"
+                },
+                {
+                    createdAt:"desc"
+                },
+        ]
         })
         return notes
     }catch(error){
@@ -48,7 +53,8 @@ export const updateNote = async (formData:FormData) => {
             where:{id},
             data:{
                 title:updatedData.title,
-                content:updatedData.content
+                content:updatedData.content,
+                updatedAt:new Date()
             }
         })
     }catch(error){

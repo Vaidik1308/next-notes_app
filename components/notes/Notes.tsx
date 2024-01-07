@@ -27,20 +27,6 @@ const Notes = async (props: Props) => {
       <GiNotebook className="text-[35px]"/>
       <h2 className='text-[35px]'>My Notes</h2>  
     </span>
-    <div className=" w-full  max-h-[70vh] overflow-y-auto min-h-fit p-2  flex flex-wrap gap-8 mx-auto  justify-start">
-    {
-      notes  &&  notes.map((note:NoteBody,i) => (
-        <Note
-          key={note.id}
-          id={note.id}
-          title={note.title}
-          content={note.content}
-          createdAt={note.createdAt}
-          bgColor={bgColor[Math.floor(Math.random() * bgColor.length)]}
-        />
-      ))
-    }
-    </div>
     </section>
   )
 }
