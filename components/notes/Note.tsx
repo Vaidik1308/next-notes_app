@@ -38,7 +38,7 @@ const Note = ({title,content,createdAt,bgColor,id}:Note) => {
     useOnClickOutside(deleteRef, () => setShow(false))
     
   return (
-    <section  className={` shadow-lg mb-8 note lg:w-[340px] xl:w-[260px] hover:animate-pulse transition px-3 py-1  h-fit min-h-[25vh] flex flex-col gap-3 rounded-[15px] ${bgColor}  text-black md:w-[270px] md-1:w-[95%] sm:w-[95%] w-[95%] `}>
+    <section  className={` shadow-lg mb-8 note lg:w-[340px] xl:w-[260px] hover:animate-pulse transition px-3 py-1  h-fit min-h-[25vh] flex flex-col gap-3 rounded-[15px] ${bgColor}  text-black md:w-[270px] md-1:w-[95%] sm:w-[95%] w-[95%] 3xl:w-[360px] `}>
         <div className='w-full flex justify-between items-center'>
             <span className=' text-[0.8rem] text-gray-700'>{createdAt.toString().substring(0,10)}</span>  
             <span className="text-2xl text-gray-500 hover:text-black transition  relative reference" ref={deleteRef}>
