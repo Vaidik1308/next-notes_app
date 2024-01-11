@@ -20,8 +20,8 @@ export default async function Home() {
         {!session ? (
         
           <div className="flex gap-2">
-            <Link href={"/sign-in"} className="flex justify-center items-center bg-white px-6 hover:bg-black hover:text-white transition w-fit rounded-sm text-[16px] font-semibold py-[2px] ">Sign In</Link>
-            <Link href={"/sign-up"} className="flex justify-center items-center bg-white px-6 hover:bg-black hover:text-white transition w-fit rounded-sm text-[16px] font-semibold py-[2px] ">Sign Up</Link>
+            <Link href={"/sign-in"} className="flex justify-center items-center bg-white px-6  hover:bg-black hover:text-white transition w-fit rounded-sm text-[16px] font-semibold py-2 ">Sign In</Link>
+            <Link href={"/sign-up"} className="flex justify-center items-center bg-white px-6 hover:bg-black hover:text-white transition w-fit rounded-sm text-[16px] font-semibold py-2 ">Sign Up</Link>
           </div>
         ): (
           <div className="flex gap-2">

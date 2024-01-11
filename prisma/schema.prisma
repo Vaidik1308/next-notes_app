@@ -43,6 +43,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   notes         Note[]
+  blogs         Blog[]
 }
 
 model VerificationToken {
@@ -64,3 +65,21 @@ model Note {
   author      User @relation(fields:[authorEmail],references:[email])
 }
 
+model Blog{
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  content String
+  tagsIds String[]
+  createdAt DateTime @default(now())
+  updatedAt   DateTime?  @updatedAt
+  img String?
+  authorEmail String
+  author User @relation(fields: [authorEmail],references: [email])
+  likes Int? @default(0)
+}
+
+model Tag{
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  label String
+  // blog Blog @relation(fields: [id],references: [id])
+}
