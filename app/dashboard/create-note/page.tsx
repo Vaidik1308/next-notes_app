@@ -1,14 +1,14 @@
-import AddNote from '@/components/addNote/AddNote'
-import React from 'react'
+import AddNote from "@/components/addNote/AddNote";
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const CreateNote = (props: Props) => {
   return (
     <div>
-      <AddNote/>
+      <AddNote />
     </div>
-  )
-}
+  );
+};
 
-export default CreateNote
+export default CreateNote;
