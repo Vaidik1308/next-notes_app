@@ -38,7 +38,7 @@ const BlogsPage = async () => {
         <GiNotebook className="text-[35px]" />
         <h2 className="text-[35px]">Your Blogs</h2>
       </div>
-      <div className=" grid lg:grid-cols-3 md:grid-col-2 gap-4 p-4  h-[55vh] overflow-y-auto">
+      <div className=" grid lg:grid-cols-2 md:grid-col-2 gap-4 p-4  h-[55vh] overflow-y-auto">
         {blogs ? (
           blogs.map((blog) => (
             <SingleBlog

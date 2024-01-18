@@ -2,10 +2,12 @@
 import { addNote } from "@/lib/actions/actions";
 import React from "react";
 import { BiBookAdd } from "react-icons/bi";
+import { Button } from "../ui/button";
 
 type Props = {};
 
 const AddNote = () => {
+  
   return (
     <div className="flex-[1.2] shadow-lg bg-[#014C42] min-h-screen p-3">
       <span className="flex flex-col items-start gap-2 text-[20px]">
@@ -34,12 +36,13 @@ const AddNote = () => {
             rows={10}
           />
           <div className="w-full flex jus">
-            <button
+            <Button
+              variant="ghost"
               type="submit"
-              className=" rounded-sm py-1 w-fit bg-[#FBF9F1] p-1 px-4 text-black"
+              className=" rounded-sm py-1 w-fit bg-[#FBF9F1] p-1 px-6 text-black"
             >
               Submit
-            </button>
+            </Button>
           </div>
         </form>
       </span>

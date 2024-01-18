@@ -1,10 +1,12 @@
 import { getAuthSession } from "@/app/api/auth/[...nextauth]/route";
 import { Blog, Tag } from "@/types";
+import { relativeDate } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { BiEdit } from "react-icons/bi";
-import { BsTrash } from "react-icons/bs";
+import { BsTrash } from "react-icons/bs"
+import Markdown from "react-markdown";
 
 const getTags = async () => {
   const res = await fetch(`http://localhost:3000/api/tags`, {
@@ -61,15 +63,15 @@ const BlogPage =  async ({params}:{params:{blogId:string}}) => {
                   session?.user?.email === blog.authorEmail && (
                     <div className="flex gap-3">
                       <Link
-                        href={"/"}
-                        className="rounded-lg bg-[#ECF0F6]  px-4 py-1 flex items-center gap-1"
+                        href={`/dashboard/blogs/editBlog/${blog.id}`}
+                        className="rounded-sm bg-black text-white hover:bg-white hover:text-black transition px-4 py-1 flex items-center gap-1"
                       >
                         <BiEdit />
                         <span>Edit</span>
                       </Link>
                       <Link
                         href={"/"}
-                        className="bg-[#ECF0F6] hover:bg-red-500 transition hover:text-white rounded-lg  px-4 py-1 flex items-center gap-1"
+                        className="bg-white hover:bg-red-500 transition hover:text-white rounded-sm  px-4 py-1 flex items-center gap-1"
                       >
                         <BsTrash />
                         <span>Delete</span>
@@ -80,7 +82,7 @@ const BlogPage =  async ({params}:{params:{blogId:string}}) => {
                 
               </div>
               <div>
-                <p className="text-sm">{date.toString().substring(0,10)}</p>
+                <p className="text-sm">{relativeDate(blog.createdAt)}</p>
               </div>
 
               <div className="flex gap-2 mt-4">
@@ -91,8 +93,10 @@ const BlogPage =  async ({params}:{params:{blogId:string}}) => {
                 )}
               </div>
             </div>
-            <div>
-              <p>{blog.content}</p>
+            <div className="px-4 w-full h-[38vh] overflow-y-auto markdown">
+              <Markdown>
+                {blog.content}
+              </Markdown>
             </div>
           </div>
         )

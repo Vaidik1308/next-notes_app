@@ -1,19 +1,25 @@
 "use client";
 
 import React, { FormEvent, useEffect, useState } from "react";
-import { Tag } from "@/types";
+import { Blog, Tag } from "@/types";
 import CreatableReactSelect from "react-select/creatable";
 import { Send } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-const CreateBlog = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+
+
+
+
+
+const EditBlogForm = ({singleBlog}:{singleBlog:Blog}) => {
+  const [title, setTitle] = useState(singleBlog.title);
+  const [content, setContent] = useState(singleBlog.content);
   const [tags, setTags] = useState<Tag[] | []>([]);
+  const [blogTags, setBlogTags] = useState<Tag[] | []>([]);
   const [selectedTags, setSelectedTags] = useState<Tag[] | []>([]);
   const router = useRouter();
-
+    
   const addTag = async (label: string) => {
     try {
       const res = await fetch(`http://localhost:3000/api/tags`, {
@@ -44,22 +50,25 @@ const CreateBlog = () => {
         cache: "no-cache",
       });
       const tags = (await res.json()) as Tag[];
+      const blogTags = tags.filter((tag) => singleBlog.tagsIds.includes(tag.id));
+      setBlogTags(blogTags)
       setTags(tags);
     };
 
     getTags();
-  }, []);
+
+  }, [singleBlog]);
   const options = tags.map((tag) => {
     return { label: tag.label, value: tag.id };
   });
-  const value = selectedTags?.map((tag) => {
+  const value = blogTags?.map((tag) => {
     return { label: tag.label, value: tag.id };
   });
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const tagsIds = selectedTags.map((tag) => tag.id);
+    const tagsIds = blogTags.map((tag) => tag.id);
     console.log(tagsIds);
 
     const data = {
@@ -69,8 +78,8 @@ const CreateBlog = () => {
     };
     console.log(data);
     try {
-      const res = await fetch(`http://localhost:3000/api/blogs`, {
-        method: "POST",
+      const res = await fetch(`http://localhost:3000/api/blogs/${singleBlog.id}`, {
+        method: "PUT",
         body: JSON.stringify(data),
         headers: {
           "Content-type": "application/json",
@@ -85,6 +94,9 @@ const CreateBlog = () => {
     }
 
   };
+
+
+ 
 
   return (
     <form
@@ -120,7 +132,7 @@ const CreateBlog = () => {
           value={value}
           options={options}
           onChange={(tags) => {
-            setSelectedTags(
+            setBlogTags(
               tags.map((tag) => {
                 return { label: tag.label, id: tag.value };
               }),
@@ -145,4 +157,4 @@ const CreateBlog = () => {
   );
 };
 
-export default CreateBlog;
+export default EditBlogForm;

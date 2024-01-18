@@ -1,9 +1,11 @@
 import { getAuthSession } from "@/app/api/auth/[...nextauth]/route";
 import { Blog, Tag } from "@/types";
+import { relativeDate } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { BiLike } from "react-icons/bi";
+import Markdown from 'react-markdown'
 
 type Props = {};
 const getTags = async () => {
@@ -35,18 +37,18 @@ const SingleBlog = async ({
   const session = await getAuthSession();
   const imageUrl = await session?.user?.image;
   return (
-    <section className="flex flex-col justify-start gap-1.5 bg-white rounded-[10px] overflow-hidden  h-[400px] w-[400px] shadow-lg p-1">
-      <div className="w-full p-1">
-        <div className="relative h-[150px] w-[380px] overflow-hidden flex justify-center">
+    <section className="flex  justify-start gap-1.5 bg-white rounded-[10px] overflow-hidden  h-[230px] w-[600px]  shadow-lg p-1">
+      <div className="w-fit p-1">
+        <div className="relative h-[210px] items-center w-[260px] overflow-hidden flex justify-center">
           <Image
             alt="main_pic"
             fill
             className=" object-cover bg-white overflow-hidden hover:scale-[1.1] transition"
-            src="/assets/scenery.jpg"
+            src="/assets/blog.jpg"
           />
         </div>
       </div>
-      <div className="px-3 pt-1  flex flex-col gap-1.5 w-full">
+      <div className="px-3 pt-1  flex flex-col gap-1.5 w-full justify-between">
         <div className="flex justify-between gap-2  flex-shrink-0 lg:w-[100%] items-start flex-col">
           <div className="flex items-center gap-2 font-semibold w-fit p-1">
             <div className="relative h-[20px] w-[20px] ">
@@ -78,20 +80,18 @@ const SingleBlog = async ({
             
           </div>
         </div>
-        <div className="min-h-fit w-[100%] flex flex-col">
+        <div className="min-h-[16vh] w-[100%] flex flex-col justify-between">
           <Link href={`/dashboard/blogs/${id}`}>
             <h1 className="text-[22px] leading-5 mb-1 font-extrabold">{title.length > 30 ? `${title.substring(0,25)}...` : title}</h1>
           </Link>
-          <p className="text-[13px] leading-4 h-[12vh] break-words w-[100%]">
+          <Markdown className="text-[13px] leading-4 h-[12vh] break-words w-[100%]">
             {content.length > 200 ? `${content.substring(0, 200)}... ` : content}
-            {content.length> 320 && (
-              <Link href={`/dashboard/blogs/${id}`} className="font-bold">Read more</Link>
-            )}
-          </p>
+            
+          </Markdown>
         </div>
         <div className="flex justify-between items-center">
           <span className="font-extrabold text-[12px] ">
-            {createdAt.toString()?.substring(0, 16)}
+            {createdAt}
           </span>
           <div className="flex">
             <button className="flex items-center gap-1 text-[18px]">

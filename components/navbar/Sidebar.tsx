@@ -22,7 +22,7 @@ const Sidebar = (props: Props) => {
         </Link>
         <Link
           className="rounded-[8px] px-3 py-5 transition flex justify-start items-center gap-2 text-[17px] sm:hover:bg-[#003A33] hover:bg-gray-500 w-full"
-          href={"/tasks"}
+          href={"/dashboard/tasks"}
         >
           <BsListTask className="text-[22px]" />
           <span className="text-[17px]">Tasks</span>

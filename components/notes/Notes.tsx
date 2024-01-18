@@ -26,11 +26,12 @@ const Notes = async (props: Props) => {
         <h2 className="text-[35px]">My Notes</h2>
       </span>
       <div className="w-full flex justify-center mx-auto">
-        <div className=" w-[95%] text-black   max-h-[58vh] overflow-y-auto min-h-fit py-2  flex flex-wrap lg:gap-8   justify-start lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 md-1:grid md-1:grid-cols-1 sm:grid sm:grid-cols-1 xl:grid xl:grid-cols-3 2xl:grid 2xl:grid-cols-4 2xl:w-[100%] 3xl:grid 3xl:grid-cols-4">
+        <div className=" w-[95%] text-black   max-h-[58vh] overflow-y-auto min-h-fit py-2  flex flex-wrap lg:gap-8   justify-start lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 md-1:grid md-1:grid-cols-1 sm:grid sm:grid-cols-1 xl:grid xl:grid-cols-3  2xl:grid 2xl:grid-cols-4 2xl:w-[100%] 3xl:grid 3xl:grid-cols-4">
           {notes &&
             notes.map((note: NoteBody, i) => (
               <Note
                 key={note.id}
+                index={i}
                 id={note.id}
                 title={note.title}
                 content={note.content}
