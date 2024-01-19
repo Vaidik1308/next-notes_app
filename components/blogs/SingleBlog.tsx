@@ -48,7 +48,7 @@ const SingleBlog = async ({
           />
         </div>
       </div>
-      <div className="px-3 pt-1  flex flex-col gap-1.5 w-full justify-between">
+      <div className="px-2 pt-0  flex flex-col gap-1.5 w-full justify-between">
         <div className="flex justify-between gap-2  flex-shrink-0 lg:w-[100%] items-start flex-col">
           <div className="flex items-center gap-2 font-semibold w-fit p-1">
             <div className="relative h-[20px] w-[20px] ">

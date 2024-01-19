@@ -1,11 +1,12 @@
+// 'use client'
 import { getAuthSession } from "@/app/api/auth/[...nextauth]/route";
+import DeleteBtn from "@/components/DeleteBtn";
 import { Blog, Tag } from "@/types";
 import { relativeDate } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { BiEdit } from "react-icons/bi";
-import { BsTrash } from "react-icons/bs"
 import Markdown from "react-markdown";
 
 const getTags = async () => {
@@ -26,6 +27,8 @@ const getSingleBlog = async (id:string) => {
   }
 }
 
+
+
 const BlogPage =  async ({params}:{params:{blogId:string}}) => {
   const session = await getAuthSession();
 
@@ -36,6 +39,8 @@ const BlogPage =  async ({params}:{params:{blogId:string}}) => {
   const blogTags = tags.filter((tag) => blog.tagsIds.includes(tag.id));
 
   const date = blog.createdAt 
+
+  
   
   
   return (
@@ -69,13 +74,7 @@ const BlogPage =  async ({params}:{params:{blogId:string}}) => {
                         <BiEdit />
                         <span>Edit</span>
                       </Link>
-                      <Link
-                        href={"/"}
-                        className="bg-white hover:bg-red-500 transition hover:text-white rounded-sm  px-4 py-1 flex items-center gap-1"
-                      >
-                        <BsTrash />
-                        <span>Delete</span>
-                      </Link>
+                      <DeleteBtn  id={blog.id} />
                     </div> 
                   )
                 }

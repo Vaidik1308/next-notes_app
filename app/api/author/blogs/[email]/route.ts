@@ -12,9 +12,10 @@ export const GET = async (request:Request,
         where:{
           authorEmail:email 
         },
-        orderBy:{
-            createdAt:"desc"
-        }
+        orderBy:[
+          {updatedAt:"desc"},
+          {createdAt:"desc"},
+        ]
         
       });
       return NextResponse.json(blogs, { status: 200 });
