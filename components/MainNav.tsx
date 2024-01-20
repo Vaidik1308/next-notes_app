@@ -9,7 +9,7 @@ const MainNav = async (props: Props) => {
     const session = await getAuthSession();
   const profilePic = session?.user?.image as string;
   return (
-    <nav className="w-full flex items-center py-2 mx-auto fixed z-[2] sm:justify-between justify-center bg-[#F67470]">
+    <nav className="w-full flex items-center py-2 mx-auto sticky z-[2] sm:justify-between justify-center bg-[#F67470]">
         <Link href={"/"} className="flex font-bold text-[26px] w-fit pl-4">
           <span className="text-white">PAP</span>
           <span>WRITE</span>

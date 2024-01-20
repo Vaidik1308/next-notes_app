@@ -116,3 +116,15 @@
 /* body{
   background-color: #F67470;
 } */
+
+/* .grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-auto-rows: min-content;
+  grid-gap: 0;
+}
+
+.items1{
+  grid-column-start: 1;
+  grid-column-end: 3;
+} */

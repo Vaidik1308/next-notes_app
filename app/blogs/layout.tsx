@@ -1,3 +1,4 @@
+import MainNav from "@/components/MainNav";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -11,14 +12,13 @@ export const metadata: Metadata = {
     children: React.ReactNode;
   }) {
     return (
-          <main className="flex md:flex-row flex-col ">
-            <div className="flex-[3] ">
+          <main className="flex flex-col ">
+            <MainNav/>
+            <div className="flex-[1] ">
                 {/* main */}
                 {children}
             </div>
-            <div className="flex-1 bg-red-200 min-w-[280px]">
-                {/* side bar */}
-            </div>
+            
           </main>
     );
   }

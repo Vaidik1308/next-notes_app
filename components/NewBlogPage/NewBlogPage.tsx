@@ -1,8 +1,6 @@
 import React from 'react'
 import SingleBlogUI from './SingleBlogUI'
-import MainNav from '../MainNav'
 import { Blog, Tag } from '@/types'
-import toast from 'react-hot-toast'
 
 type Props = {}
 const getAllBlogs = async () => {
@@ -23,13 +21,14 @@ const NewBlogPage = async (props: Props) => {
     // console.log(blogs);
     
   return (
-    <div className='px-5  min-h-screen mt-1 '>
-        <MainNav/>
-        <div className='w-fit pb-4'>
-            <h1 className='text-[25px] font-bold'>Trending</h1>
+    <div className='px-5  min-h-screen mt-0 '>
+        
+        
+        <div className='w-full p-2 sticky top-[-4px] z-10 bg-white px-6'>
+            <h1 className='text-[35px] font-bold '>Trending</h1>
         </div>
-        <div className='grid xl:grid-cols-3 sm:grid-cols-2 justify-center items-center gap-4 py-4 mt-8'>
-        {
+        <div className='flex flex-col justify-center items-center gap-8 pb-4 '>
+        { 
             blogs.length ? (
                 blogs.map((blog) => (
                     <SingleBlogUI

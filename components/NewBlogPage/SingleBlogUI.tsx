@@ -26,47 +26,54 @@ const SingleBlogUI = async ({title,content,id,createdAt,updatedAt,tagsIds,author
 
     const slicedTag = blogTags.slice(0,2)
   return (
-    <section className='bg-white w-[300px] h-fit overflow-auto rounded-lg shadow-2xl flex flex-col'>
+    <section className='bg-white w-full min-h-[30vh] overflow-auto rounded-sm  flex gap-4 '>
         <div>
-            <div className='relative h-[180px] w-[300px]'>
-                <Image src="/assets/blog.jpg" fill alt='blog_img' className='object-cover rounded-lg'  />
-                <div className='m-3 absolute text-[13px] px-3 py-[2px] rounded-lg text-white bg-[#262626] '>
-                    <Link href={"/"}>FASHION</Link>
-                </div>
+            <div className='relative h-[100%] w-[300px] overflow-hidden'>
+                <Image src="/assets/blog.jpg" fill alt='blog_img' className='object-cover rounded-lg hover:scale-[1.2]  transition-all'  />
+                
             </div>
         </div>
-        <div className='flex flex-col gap-2 p-3 pb-4'>
-            <div className='flex w-full items-center justify-between'>
+        <div className='flex flex-col gap-1 p-3 pb-1'>
+            <div className='flex flex-wrap gap-1 items-center'>
+                {
+                    blogTags.length > 2 && (
+                        slicedTag.map((tag) => (
+                        
+                            <Link key={tag.id} className="bg-[#F2F8F7] text-black px-2 text-xs py-1 rounded-sm" href={"/"}>{tag.label}</Link>
+                        )) 
+                    ) 
+                }
+                {
+                blogTags.length <=2 && (
+                    blogTags.map((tag) => (
+                    <Link key={tag.id} className="bg-[#F2F8F7] text-black px-2 text-xs py-1 rounded-sm" href={"/"}>{tag.label}</Link>
+                ))
+                )
+                } 
+            </div>
+            
+            <div className='w-full'>
+                <h1 className='font-[700] leading-tight pr-6 text-[24px]'>
+                    {title}
+                </h1>
+            </div>
+            <div className='flex w-full items-center justify-start gap-2'>
                 <div className='flex items-center w-fit gap-1.5'>
-                    <div className='relative h-[30px] w-[30px]'>
+                    <div className='relative h-[20px] w-[20px]'>
                         <Image src={ authImg  || "/assets/blog.jpg"} fill  alt='blog_img' className='object-cover rounded-[50%]'  />
                     </div>
-                    <p className='text-[12px] text-[#868282] font-bold'>{authorName}</p>
+                    <p className='text-xs text-[#868282] font-bold'>{authorName}</p>
                 </div>
+                <span className='text-gray-400'>|</span>
                 <div className='w-fit text-[11px] text-[#868282] font-bold'>
                     <p>{relativeDate(createdAt)}</p>
                 </div>
             </div>
-            <div className='flex flex-wrap gap-1 items-center'>
-                {
-                    blogTags && (
-                        blogTags.map((tag) => (
-                            <div key={tag.id} className='  text-[13px] px-3 py-[2px] rounded-sm text-white bg-[#262626] '>
-                                <Link href={"/"}>{tag.label}</Link>
-                            </div>
-                        ))
-                    )
-                }
-                
-            </div>
-            <div className='w-full'>
-                <h1 className='font-[700] leading-tight pr-6 text-[20px]'>
-                    {title}
-                </h1>
-            </div>
-            <div className='w-full'>
+           
+            
+            <div className='w-[60%] min-h-[12vh]'>
                 <Markdown className=' break-words text-left text-[#262626] text-[14px] leading-4.5'>
-                    {content.length > 150 ? `${content.substring(0, 150)}... ` : content}
+                    {content.length > 150 ? `${content.trim().substring(0, 150)}... ` : content.trim()}
                 </Markdown>
             </div>
             <div className='w-full'>
