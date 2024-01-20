@@ -4,17 +4,16 @@ import { getAuthSession } from "../auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { Blog } from "@/types";
 
-export const GET = async () => {
+export const GET = async (req:Request) => {
   const session = await getAuthSession();
-  if (!session) {
-    redirect("/sign-in");
-  }
+  // if (!session) {
+  //   redirect("/sign-in");
+  // }
   try {
     const blogs = await prisma.blog.findMany({
-      where:{
-        authorEmail:session.user?.email as string
-      },
-      // include: { author: { select: { name: true } } },
+      include: { author: { select: { name:true,image:true } } }, orderBy: {
+        createdAt: "desc"
+    },
     });
     return NextResponse.json(blogs, { status: 200 });
   } catch (error) {

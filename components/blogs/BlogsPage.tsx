@@ -7,6 +7,7 @@ import { Blog } from "@/types";
 import { getAuthSession } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { relativeDate } from "@/utils";
+import Image from "next/image";
 
 const getAllBlogs = async (email:string):Promise<Blog[]> => {
   try{
@@ -38,8 +39,8 @@ const BlogsPage = async () => {
         <GiNotebook className="text-[35px]" />
         <h2 className="text-[35px]">Your Blogs</h2>
       </div>
-      <div className=" grid lg:grid-cols-2 md:grid-col-2 gap-4 p-4  h-[55vh] overflow-y-auto">
-        {blogs ? (
+      <div className=" grid lg:grid-cols-2 md:grid-col-2 gap-4 p-4  h-[55vh] overflow-y-auto ">
+        {blogs.length ? (
           blogs.map((blog) => (
             <SingleBlog
               title={blog.title}
@@ -56,7 +57,12 @@ const BlogsPage = async () => {
             />
           ))
         ) : (
-          <div>Empty</div>
+          <div className="text-black flex flex-col items-center justify-center w-full">
+            <div className="relative h-[200px] w-[280px]">
+              <Image className="object-contain" fill src="/assets/hand-drawn-no-data-concept/blog_empty.png" alt="empty_blog" />
+            </div>
+            <h1 className="text-[20px] font-bold">Empty</h1>
+          </div>
         )}
       </div>
       <Link

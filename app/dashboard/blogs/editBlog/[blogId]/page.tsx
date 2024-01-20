@@ -8,7 +8,9 @@ type Props = {
 
 const getSingleBlog = async (id:string) => {
     try{
-      const res  = await fetch(`http://localhost:3000/api/blogs/${id}`)
+      const res  = await fetch(`http://localhost:3000/api/blogs/${id}`,{
+        cache:'no-store'
+      })
       const blog = await res.json()
       return blog
     } catch(error){
@@ -20,6 +22,7 @@ const getSingleBlog = async (id:string) => {
 const EditBlog = async ({params}: Props) => {
 
     const singleBlog:Blog = await getSingleBlog(params.blogId)
+    console.log(singleBlog);
     
     
   return (

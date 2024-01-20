@@ -6,6 +6,7 @@ import CreatableReactSelect from "react-select/creatable";
 import { Send } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import toast from "react-hot-toast";
 
 const CreateBlog = () => {
   const [title, setTitle] = useState("");
@@ -25,7 +26,7 @@ const CreateBlog = () => {
       });
 
       if (res.ok) {
-        console.log("successfully created the tag");
+        toast.success("successfully created new tag");
         const newTag = await res.json();
         console.log(newTag);
 
@@ -77,8 +78,9 @@ const CreateBlog = () => {
         },
       });
       if (res.ok) {
+        toast.success("successfully created  blog")
         router.push("/dashboard/blogs/");
-        revalidatePath("/dashboard/blogs/")
+        router.refresh()
       }
     } catch (error) {
       console.log(error);
@@ -102,7 +104,7 @@ const CreateBlog = () => {
       />
       <div className="flex items-start gap-2">
         <textarea
-          className="bg-[#F8F6E9] text-[25px] flex-[3] outline-none"
+          className="bg-[#F8F6E9] text-[20px] flex-[3] outline-none"
           placeholder="content"
           name="content"
           id=""

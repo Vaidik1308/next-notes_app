@@ -6,6 +6,7 @@ import CreatableReactSelect from "react-select/creatable";
 import { Send } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import toast from "react-hot-toast";
 
 
 
@@ -13,8 +14,8 @@ import { revalidatePath } from "next/cache";
 
 
 const EditBlogForm = ({singleBlog}:{singleBlog:Blog}) => {
-  const [title, setTitle] = useState(singleBlog.title);
-  const [content, setContent] = useState(singleBlog.content);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [tags, setTags] = useState<Tag[] | []>([]);
   const [blogTags, setBlogTags] = useState<Tag[] | []>([]);
   const [selectedTags, setSelectedTags] = useState<Tag[] | []>([]);
@@ -53,11 +54,15 @@ const EditBlogForm = ({singleBlog}:{singleBlog:Blog}) => {
       const blogTags = tags.filter((tag) => singleBlog.tagsIds.includes(tag.id));
       setBlogTags(blogTags)
       setTags(tags);
+      setTitle(singleBlog.title)
+      setContent(singleBlog.content)
+
+
     };
 
     getTags();
 
-  }, [singleBlog]);
+  }, [singleBlog,singleBlog.title,singleBlog.content]);
   const options = tags.map((tag) => {
     return { label: tag.label, value: tag.id };
   });
@@ -69,14 +74,13 @@ const EditBlogForm = ({singleBlog}:{singleBlog:Blog}) => {
     e.preventDefault();
 
     const tagsIds = blogTags.map((tag) => tag.id);
-    console.log(tagsIds);
+    // console.log(tagsIds);
 
     const data = {
       title,
       content,
       tagsIds,
     };
-    console.log(data);
     try {
       const res = await fetch(`http://localhost:3000/api/blogs/${singleBlog.id}`, {
         method: "PUT",
@@ -86,11 +90,13 @@ const EditBlogForm = ({singleBlog}:{singleBlog:Blog}) => {
         },
       });
       if (res.ok) {
+        toast.success("updated blog successfully")
         router.push("/dashboard/blogs/");
-        revalidatePath("/dashboard/blogs/")
+        router.refresh()
       }
     } catch (error) {
       console.log(error);
+      toast.error("error in updating the blog")
     }
 
   };

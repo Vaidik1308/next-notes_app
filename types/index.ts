@@ -23,8 +23,8 @@ export type Blog = {
   id?: string;
   title: string;
   content: string;
-  createdAt: Date | null;
-  updatedAt: Date | null;
+  createdAt: Date ;
+  updatedAt: Date;
   authorEmail: string;
   img: string | null;
   tagsIds: string[];
