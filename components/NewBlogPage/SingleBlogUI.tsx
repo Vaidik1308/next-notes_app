@@ -26,9 +26,9 @@ const SingleBlogUI = async ({title,content,id,createdAt,updatedAt,tagsIds,author
 
     const slicedTag = blogTags.slice(0,2)
   return (
-    <section className='bg-white w-full min-h-[30vh] overflow-auto rounded-sm  flex gap-4 '>
-        <div>
-            <div className='relative h-[100%] w-[300px] overflow-hidden'>
+    <section className='bg-white w-full min-h-[30vh] overflow-auto rounded-sm  flex sm:flex-row  flex-col gap-4 '>
+        <div className=''>
+            <div className='relative sm:h-[100%] h-[350px] w-full  sm:w-[300px] overflow-hidden'>
                 <Image src="/assets/blog.jpg" fill alt='blog_img' className='object-cover rounded-lg hover:scale-[1.2]  transition-all'  />
                 
             </div>
@@ -71,7 +71,7 @@ const SingleBlogUI = async ({title,content,id,createdAt,updatedAt,tagsIds,author
             </div>
            
             
-            <div className='w-[60%] min-h-[12vh]'>
+            <div className='md:w-[60%] min-h-[12vh]'>
                 <Markdown className=' break-words text-left text-[#262626] text-[14px] leading-4.5'>
                     {content.length > 150 ? `${content.trim().substring(0, 150)}... ` : content.trim()}
                 </Markdown>

@@ -20,7 +20,7 @@ const Categories = async (props: Props) => {
   return (
     <div className='w-[95%] mx-auto'>
         <h1 className='text-[22px] font-bold'>Categories</h1>
-        <div className='w-full mt-4 flex flex-col gap-3 h-[45vh] overflow-y-auto'>
+        <div className='w-full mt-4 flex flex-col gap-3 h-[65vh] overflow-y-auto'>
             {
               tags && tags.map((tag:Tag) => (
                 <SingleCategory key={tag.id} id={tag.id} label={tag.label} />

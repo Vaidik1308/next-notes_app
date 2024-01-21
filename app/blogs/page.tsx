@@ -6,7 +6,7 @@ type Props = {}
 
 const BlogPage = (props: Props) => {
   return (
-    <div className='w-full flex'>
+    <div className='w-full flex md:flex-row flex-col'>
       <div className='flex-[3]'>
         <NewBlogPage/>
       </div>
