@@ -41,6 +41,7 @@ const NewBlogPage = async (props: Props) => {
                         tagsIds={blog.tagsIds}
                         authorName={blog.author?.name}
                         authImg={blog.author?.image}
+                        likes={blog.likes}
                     />
                 ))
             ) : (

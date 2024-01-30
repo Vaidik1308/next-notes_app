@@ -99,3 +99,23 @@ export const deleteNote = async (id: string) => {
   revalidatePath("/dashboard");
   // redirect('/dashboard')
 };
+
+
+
+
+export const getBlogsByCategory = async (tagId:string) => {
+  
+  try{
+    const blogByTag = await prisma.blog.findMany({
+      where:{
+        tagsIds:{
+          has:tagId
+        }
+      }
+    })
+    return blogByTag
+  }catch(error){
+    console.log(error);
+    
+  }
+}

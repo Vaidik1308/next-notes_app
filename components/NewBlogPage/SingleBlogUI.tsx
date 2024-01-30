@@ -4,7 +4,10 @@ import { ArrowRight, ArrowRightIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { BiLike, BiSolidLike } from 'react-icons/bi'
 import Markdown from 'react-markdown'
+import LikesComp from '../Likes/LikesComp'
+import { getAuthSession } from '@/app/api/auth/[...nextauth]/route'
 
 type Props = Blog & {
     authorName:string;
@@ -18,13 +21,15 @@ const getTags = async () => {
     return tags;
   };
 
-const SingleBlogUI = async ({title,content,id,createdAt,updatedAt,tagsIds,authorName,authImg}:Props) => {
+const SingleBlogUI = async ({title,content,id,createdAt,updatedAt,tagsIds,authorName,authImg,likes}:Props) => {
 
     const tags = await getTags();
 
     const blogTags = tags.filter((tag) => tagsIds.includes(tag.id));
 
     const slicedTag = blogTags.slice(0,2)
+
+    const session = await getAuthSession()
   return (
     <section className='bg-white w-full min-h-[30vh] overflow-auto rounded-sm  flex sm:flex-row  flex-col gap-4 '>
         <div className=''>
@@ -71,10 +76,13 @@ const SingleBlogUI = async ({title,content,id,createdAt,updatedAt,tagsIds,author
             </div>
            
             
-            <div className='md:w-[60%] min-h-[12vh]'>
+            <div className='md:w-[60%] min-h-[8vh]'>
                 <Markdown className=' break-words text-left text-[#262626] text-[14px] leading-4.5'>
                     {content.length > 150 ? `${content.trim().substring(0, 150)}... ` : content.trim()}
                 </Markdown>
+            </div>
+            <div className='w-full'>
+                <LikesComp authorEmail={session?.user?.email} id={id} likes={likes} />
             </div>
             <div className='w-full'>
                 <Link className='text-[#4CE0D7] flex items-center gap-2' href={`/blogs/${id}`}>

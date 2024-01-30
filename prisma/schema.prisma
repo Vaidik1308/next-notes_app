@@ -75,7 +75,7 @@ model Blog{
   img String?
   authorEmail String
   author User @relation(fields: [authorEmail],references: [email])
-  likes Int? @default(0)
+  likes String[] @default([])
 }
 
 model Tag{
