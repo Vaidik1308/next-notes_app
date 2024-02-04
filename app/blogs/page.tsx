@@ -1,14 +1,16 @@
+
 import Categories from '@/components/Categories/Categories'
 import NewBlogPage from '@/components/NewBlogPage/NewBlogPage'
-import React from 'react'
 
-type Props = {}
 
-const BlogPage = (props: Props) => {
+
+
+
+const BlogPage =  () => {
   return (
     <div className='w-full flex md:flex-row flex-col'>
       <div className='flex-[3]'>
-        <NewBlogPage/>
+        <NewBlogPage  />
       </div>
       <div className="flex-1  mt-8">
           {/* side bar */}

@@ -1,10 +1,9 @@
 import { Blog, Tag } from '@/types'
 import { relativeDate } from '@/utils'
-import { ArrowRight, ArrowRightIcon } from 'lucide-react'
+import { ArrowRightIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { BiLike, BiSolidLike } from 'react-icons/bi'
 import Markdown from 'react-markdown'
 import LikesComp from '../Likes/LikesComp'
 import { getAuthSession } from '@/app/api/auth/[...nextauth]/route'
@@ -30,6 +29,10 @@ const SingleBlogUI = async ({title,content,id,createdAt,updatedAt,tagsIds,author
     const slicedTag = blogTags.slice(0,2)
 
     const session = await getAuthSession()
+
+    if(!session){
+        throw new Error("unauthenticated! please log in")
+    }
   return (
     <section className='bg-white w-full min-h-[30vh] overflow-auto rounded-sm  flex sm:flex-row  flex-col gap-4 '>
         <div className=''>

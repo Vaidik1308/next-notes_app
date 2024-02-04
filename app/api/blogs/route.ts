@@ -9,13 +9,36 @@ export const GET = async (req:Request) => {
   // if (!session) {
   //   redirect("/sign-in");
   // }
+  const {searchParams} = new URL(req.url)
+  const id = await searchParams.get('id') as string
+  const category = await searchParams.get("category")
+  // console.log(id);
+  // console.log(category);
+  if(id || category){
+    try{
+      const blogs = await prisma.blog.findMany({
+        where:{
+          tagsIds:{
+            has:id
+          }
+        },
+        orderBy:{
+          createdAt:"desc"
+        }
+      })
+      return NextResponse.json({blogs,category}, { status: 200 });
+    }catch(error){
+      console.log(error);
+      
+    }
+  }
   try {
     const blogs = await prisma.blog.findMany({
       include: { author: { select: { name:true,image:true } } }, orderBy: {
         createdAt: "desc"
     },
     });
-    return NextResponse.json(blogs, { status: 200 });
+    return NextResponse.json({blogs,category:"Trending"}, { status: 200 });
   } catch (error) {
     console.log(error);
   }
