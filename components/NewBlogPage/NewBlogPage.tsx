@@ -16,12 +16,13 @@ const NewBlogPage =  async ({category,tagId}:{category:string|undefined,
      
     
   return (
-    <div className='px-5  min-h-screen mt-0 '>
+    <div className='px-5  min-h-screen mt-0 w-full'>
         
         <div className='w-full p-2 sticky top-[-4px] z-10 bg-white px-6'>
             <h1 className='text-[35px] font-bold '>{category || "Trending"}</h1>
         </div>
-        <div>
+        <div className='w-full '>
+            
             <PublicBlogs tagId={tagId}/>
         </div>
         

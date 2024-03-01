@@ -1,19 +1,22 @@
 
 import Categories from '@/components/Categories/Categories'
 import NewBlogPage from '@/components/NewBlogPage/NewBlogPage'
+import wait from 'wait'
 
 
 
 
 
-const BlogPage =  ({searchParams,}:{
+const BlogPage =  async ({searchParams,}:{
   searchParams:{category:string|undefined,id:string|undefined}
 }) => {
-  console.log(searchParams.category);
-  
+  // await wait(10000)
   return (
     <div className='w-full flex md:flex-row flex-col'>
+      
       <div className='flex-[3]'>
+        
+        
         <NewBlogPage tagId={searchParams.id} category={searchParams.category} />
       </div>
       <div className="flex-1  mt-8">

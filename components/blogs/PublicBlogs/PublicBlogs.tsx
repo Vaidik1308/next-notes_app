@@ -23,9 +23,6 @@ const filteredBlogs = async (tagId:string,blogs:Blog[]) => {
 const PublicBlogs =  async ({tagId}:{tagId:string}) => {
     const blogs:Blog[] = await getAllBlogs() 
 
-
-    console.log(filteredBlogs,blogs);
-
     const filteredBlogsById:Blog[] = await filteredBlogs(tagId,blogs)
     
     
