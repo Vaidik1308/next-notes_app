@@ -7,18 +7,13 @@ import React from 'react'
 import Markdown from 'react-markdown'
 import LikesComp from '../Likes/LikesComp'
 import { getAuthSession } from '@/app/api/auth/[...nextauth]/route'
+import { getTags } from '@/lib/data'
 
 type Props = Blog & {
     authorName:string;
     authImg:string
 }
-const getTags = async () => {
-    const res = await fetch(`http://localhost:3000/api/tags`, {
-      cache: "no-cache",
-    });
-    const tags = (await res.json()) as Tag[];
-    return tags;
-  };
+
 
 const SingleBlogUI = async ({title,content,id,createdAt,updatedAt,tagsIds,authorName,authImg,likes}:Props) => {
 

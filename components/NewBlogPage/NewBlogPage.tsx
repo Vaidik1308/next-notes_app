@@ -1,38 +1,28 @@
 // 'use client'
 import { Blog } from '@/types';
 import PublicBlogs from '../blogs/PublicBlogs/PublicBlogs';
+import { getAllBlogs } from '@/lib/data';
 
 type Props = {
-    category:string | null;
-    blogs:Blog[]
-}
-const getAllBlogs = async () => {
-    try{
-        const res = await fetch(`http://localhost:3000/api/blogs`,{cache:'no-store'})
-        const {blogs,category}:Props = await res.json()
-        console.log(blogs);
-        console.log(category);
-        
-        return {blogs,category}
-    }catch(error){
-        console.log(error);
-        
-    }
+    blogs:Blog[];
 }
 
 
-const NewBlogPage =  async () => {
+const NewBlogPage =  async ({category,tagId}:{category:string|undefined,
+    tagId:string|undefined}) => {
 
-    const {blogs,category}:Props = await getAllBlogs()
+    
+
+     
     
   return (
     <div className='px-5  min-h-screen mt-0 '>
         
         <div className='w-full p-2 sticky top-[-4px] z-10 bg-white px-6'>
-            <h1 className='text-[35px] font-bold '>{category}</h1>
+            <h1 className='text-[35px] font-bold '>{category || "Trending"}</h1>
         </div>
         <div>
-            <PublicBlogs blogs={blogs}/>
+            <PublicBlogs tagId={tagId}/>
         </div>
         
     </div>

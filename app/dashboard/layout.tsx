@@ -42,7 +42,7 @@ export default function Layout({
         <div className={"flex h-fit"}>
           <Header />
         </div>
-        <div className="flex justify-center flex-col w-full h-[70vh]">
+        <div className="flex  flex-col w-full h-[70vh]">
           {children}
         </div>
       </div>

@@ -2,43 +2,19 @@ import prisma from "@/prisma";
 import { NextResponse } from "next/server";
 import { getAuthSession } from "../auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
-import { Blog } from "@/types";
 
 export const GET = async (req:Request) => {
   const session = await getAuthSession();
-  // if (!session) {
-  //   redirect("/sign-in");
-  // }
-  const {searchParams} = new URL(req.url)
-  const id = await searchParams.get('id') as string
-  const category = await searchParams.get("category")
-  // console.log(id);
-  // console.log(category);
-  if(id || category){
-    try{
-      const blogs = await prisma.blog.findMany({
-        where:{
-          tagsIds:{
-            has:id
-          }
-        },
-        orderBy:{
-          createdAt:"desc"
-        }
-      })
-      return NextResponse.json({blogs,category}, { status: 200 });
-    }catch(error){
-      console.log(error);
-      
-    }
-  }
+  const param = req.url 
+  const searchParams = new URLSearchParams(param)
+  
   try {
     const blogs = await prisma.blog.findMany({
       include: { author: { select: { name:true,image:true } } }, orderBy: {
         createdAt: "desc"
     },
     });
-    return NextResponse.json({blogs,category:"Trending"}, { status: 200 });
+    return NextResponse.json(blogs, { status: 200 });
   } catch (error) {
     console.log(error);
   }
@@ -71,4 +47,6 @@ export const POST = async (request: Request) => {
       { status: 500 },
     );
   }
+
+  return null
 };

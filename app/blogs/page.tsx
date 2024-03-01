@@ -6,11 +6,15 @@ import NewBlogPage from '@/components/NewBlogPage/NewBlogPage'
 
 
 
-const BlogPage =  () => {
+const BlogPage =  ({searchParams,}:{
+  searchParams:{category:string|undefined,id:string|undefined}
+}) => {
+  console.log(searchParams.category);
+  
   return (
     <div className='w-full flex md:flex-row flex-col'>
       <div className='flex-[3]'>
-        <NewBlogPage  />
+        <NewBlogPage tagId={searchParams.id} category={searchParams.category} />
       </div>
       <div className="flex-1  mt-8">
           {/* side bar */}

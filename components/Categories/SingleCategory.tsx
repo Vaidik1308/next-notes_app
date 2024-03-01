@@ -1,17 +1,9 @@
 import { Blog, Tag } from '@/types'
 import React from 'react'
 import Butn from './Butn'
+import { getAllBlogs } from '@/lib/data'
 
-const getAllBlogs = async () => {
-  try{
-      const res = await fetch("http://localhost:3000/api/blogs",{cache:'no-store'})
-      const {blogs,category} = await res.json()
-      return blogs
-  }catch(error){
-      console.log(error);
-      
-  }
-}
+
 
 
 const SingleCategory = async ({label,id}: Tag) => {
@@ -24,8 +16,6 @@ const SingleCategory = async ({label,id}: Tag) => {
     }
     
   })
-
-  // console.log(blogsPerTag);
   
   return (
     <div>

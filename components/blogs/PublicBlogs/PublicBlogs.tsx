@@ -1,31 +1,39 @@
 import SingleBlogUI from '@/components/NewBlogPage/SingleBlogUI'
+import { getAllBlogs } from '@/lib/data'
 import { Blog } from '@/types'
 import React from 'react'
 
-type Props = {
-    blogs:Blog[]
+type BlogsData = Blog | {
+    authorName?:string|null;
+    authImg?:string|null;
 }
 
-// const getAllBlogs = async () => {
-//     try{
-//         const res = await fetch(`http://localhost:3000/api/blogs`,{cache:'no-store'})
-//         const {blogs,category} = await res.json()
-//         console.log(blogs);
-        
-//         return blogs
-//     }catch(error){
-//         console.log(error);
-        
-//     }
-// }
 
-const PublicBlogs =  async ({blogs}: Props) => {
-    // const blogs:Blog[] = await getAllBlogs()
+
+const filteredBlogs = async (tagId:string,blogs:Blog[]) => {
+    if(tagId){
+        const filteredBlogs = blogs.filter((blog) => (
+            blog.tagsIds.includes(tagId)
+        ))
+        return filteredBlogs
+    }
+
+    return blogs
+}
+const PublicBlogs =  async ({tagId}:{tagId:string}) => {
+    const blogs:Blog[] = await getAllBlogs() 
+
+
+    console.log(filteredBlogs,blogs);
+
+    const filteredBlogsById:Blog[] = await filteredBlogs(tagId,blogs)
+    
+    
   return (
     <div className='flex flex-col justify-center items-center gap-8 pb-4 '>
         { 
-            blogs.length ? (
-                blogs.map((blog) => (
+            filteredBlogsById.length ? (
+                filteredBlogsById.map((blog) => (
                     <SingleBlogUI
                         key={blog.id}
                         id={blog.id}
@@ -34,7 +42,7 @@ const PublicBlogs =  async ({blogs}: Props) => {
                         createdAt={blog.createdAt}
                         updatedAt ={blog.updatedAt}
                         tagsIds={blog.tagsIds}
-                        authorName={blog.author?.name}
+                        authorName={blog.author?.name} 
                         authImg={blog.author?.image}
                         likes={blog.likes}
                     />
