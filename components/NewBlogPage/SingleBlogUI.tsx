@@ -25,9 +25,7 @@ const SingleBlogUI = async ({title,content,id,createdAt,updatedAt,tagsIds,author
 
     const session = await auth()
 
-    if(!session){
-        throw new Error("unauthenticated! please log in")
-    }
+    
   return (
     <section className='bg-white w-full min-h-[30vh] overflow-auto rounded-sm  flex sm:flex-row  flex-col gap-4 '>
         <div className=''>

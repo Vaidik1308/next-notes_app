@@ -44,6 +44,7 @@ model User {
   sessions      Session[]
   notes         Note[]
   blogs         Blog[]
+  tasks         Task[]
 }
 
 model VerificationToken {
@@ -76,6 +77,18 @@ model Blog{
   authorEmail String
   author User @relation(fields: [authorEmail],references: [email])
   likes String[] @default([])
+}
+
+
+model Task{
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  content String
+  isCompleted Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt   DateTime?  @updatedAt
+  authorEmail String
+  author User @relation(fields: [authorEmail],references: [email])
 }
 
 model Tag{

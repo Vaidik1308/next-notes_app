@@ -32,6 +32,17 @@ export type Blog = {
   likes: number;
 };
 
+export type Task = {
+  id?: string;
+  title: string;
+  content: string;
+  createdAt: Date ;
+  updatedAt: Date;
+  authorEmail: string;
+  isCompleted: boolean;
+  author?: Author;
+}
+
 export type Tag = {
   id: string;
   label: string;

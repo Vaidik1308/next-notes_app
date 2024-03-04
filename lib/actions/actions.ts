@@ -4,6 +4,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { NoteBody } from "@/types";
 import { auth } from "@/auth";
+import { z } from "zod";
+import { taskSchema } from "../schemas/FormSchema";
 
 export const getNotes = async () => {
   // "use server"
@@ -114,6 +116,34 @@ export const getBlogsByCategory = async (tagId:string) => {
       }
     })
     return blogByTag
+  }catch(error){
+    console.log(error);
+    
+  }
+}
+
+
+
+export const AddTaskAction = async(values:z.infer<typeof taskSchema>) => {
+  const validateFields = taskSchema.safeParse(values);
+
+  if(!validateFields.success){
+    return {error:"invalid Fields"}
+  }
+
+  const {title,content,isCompleted} = validateFields.data
+  const session = await auth()
+  const authorEmail = session?.user?.email as string
+  try{
+    await prisma.task.create({
+      data:{
+        title,
+        content,
+        authorEmail,
+        isCompleted
+      }
+    })
+  return {success:"Created Successfully"}
   }catch(error){
     console.log(error);
     
