@@ -3,13 +3,12 @@ import { redirect } from "next/navigation";
 import React from "react";
 import { BiPlus } from "react-icons/bi";
 import Link from "next/link";
-import { authOptions } from "@/lib/authOptions";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 
 type Props = {};
 
 const Dashboard = async (props: Props) => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     redirect("/sign-in");

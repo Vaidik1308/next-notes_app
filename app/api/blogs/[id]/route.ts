@@ -1,6 +1,6 @@
 import prisma from "@/prisma";
 import { NextResponse } from "next/server";
-import { getAuthSession } from "../../auth/[...nextauth]/route";
+import { auth } from "@/auth";
 
 export const GET = async (request:Request,{ params }: { params: { id: string } }) =>{
 
@@ -43,7 +43,7 @@ export const PUT = async (request:Request,{params}:{params:{id:string}}) => {
 
 export const DELETE = async (req:Request,{params}:{params:{id:string}}) => {
     const id = params.id;
-    const session = getAuthSession()
+    const session = auth()
     if(!session){
         return
     }

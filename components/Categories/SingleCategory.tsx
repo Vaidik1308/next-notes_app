@@ -10,7 +10,7 @@ const SingleCategory = async ({label,id}: Tag) => {
   
   const blogs:Blog[] = await getAllBlogs()
   let blogsPerTag = 0;
-  blogs.forEach(blog => {
+  blogs?.forEach(blog => {
     if(blog.tagsIds.includes(id)){
       blogsPerTag = blogsPerTag + 1
     }

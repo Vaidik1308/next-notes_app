@@ -1,10 +1,10 @@
 import prisma from "@/prisma";
 import { NextResponse } from "next/server";
-import { getAuthSession } from "../auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
 export const GET = async (req:Request) => {
-  const session = await getAuthSession();
+  const session = await auth();
   const param = req.url 
   const searchParams = new URLSearchParams(param)
   
@@ -22,7 +22,7 @@ export const GET = async (req:Request) => {
 
 export const POST = async (request: Request) => {
   const { title, content, tagsIds } = await request.json();
-  const session = await getAuthSession();
+  const session = await auth();
   if (!session) {
     redirect("/sign-in");
   }

@@ -1,4 +1,5 @@
 import { getAuthSession } from '@/app/api/auth/[...nextauth]/route'
+import { auth } from '@/auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -6,7 +7,7 @@ import React from 'react'
 type Props = {}
 
 const MainNav = async (props: Props) => {
-    const session = await getAuthSession();
+    const session = await auth();
   const profilePic = session?.user?.image as string;
   return (
     <nav className="w-full flex items-center py-2 mx-auto sticky z-[2] sm:justify-between justify-center bg-[#F67470]">

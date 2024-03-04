@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getAuthSession } from "./api/auth/[...nextauth]/route";
+// import { getAuthSession } from "./api/auth/[...nextauth]/route";
 import MainNav from "@/components/MainNav";
+import { auth } from "@/auth";
 
 export default async function Home() {
-  const session = await getAuthSession();
+  const session = await auth;
   const profilePic = session?.user?.image as string;
   return (
     <main className=" min-h-screen px-5 bg-[#F67470] ">

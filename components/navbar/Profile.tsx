@@ -1,11 +1,11 @@
-import { getAuthSession } from "@/app/api/auth/[...nextauth]/route";
+import { auth } from "@/auth";
 import Image from "next/image";
 import React from "react";
 
 type Props = {};
 
 const Profile = async (props: Props) => {
-  const session = await getAuthSession();
+  const session = await auth();
 
   return (
     <div className="hover:bg-gray-500 transition rounded-lg w-[95%] mx-auto flex justify-between items-center pb-3 p-3">

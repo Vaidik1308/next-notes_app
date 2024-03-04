@@ -1,10 +1,10 @@
 "use server";
 import prisma from "@/prisma";
-import { getAuthSession } from "../auth/[...nextauth]/route";
 import { NextResponse } from "next/server";
+import { auth } from "@/auth";
 
 export const GET = async (req: Request) => {
-  const session = await getAuthSession();
+  const session = await auth();
 
   // if(!session){
   //     console.log("not Logged in");

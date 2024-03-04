@@ -29,7 +29,7 @@ const PublicBlogs =  async ({tagId}:{tagId:string}) => {
   return (
     <div className='flex flex-col justify-center items-center gap-8 pb-4 '>
         { 
-            filteredBlogsById.length ? (
+            filteredBlogsById ? (
                 filteredBlogsById.map((blog) => (
                     <SingleBlogUI
                         key={blog.id}

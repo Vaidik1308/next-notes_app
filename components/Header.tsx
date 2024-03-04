@@ -1,10 +1,11 @@
-import { getAuthSession } from "@/app/api/auth/[...nextauth]/route";
+
+import { auth } from "@/auth";
 import React from "react";
 
 type Props = {};
 
 const Header = async (props: Props) => {
-  const session = await getAuthSession();
+  const session = await auth();
   const date = new Date();
   return (
     <header

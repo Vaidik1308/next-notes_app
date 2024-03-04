@@ -1,5 +1,5 @@
 'use client'
-import { getAuthSession } from '@/app/api/auth/[...nextauth]/route'
+import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -42,7 +42,7 @@ const LikesComp = ({likes,authorEmail,id}) => {
     // })
 
     const handleLikes = async (authorEmail:string) => {
-        const session = await getAuthSession()
+        const session = await auth()
         if(!session){
             redirect("/sign-in")
         }

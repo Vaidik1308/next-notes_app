@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { NextAuthProvider } from "@/providers/AuthSessionProvder";
 import Toast from "@/components/Toast/Toast";
-import MainNav from "@/components/MainNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,13 +19,11 @@ export default function RootLayout({
 }) {
   return (
     <html className="min-h-screen" lang="en">
-      <NextAuthProvider>
         <body className={`${inter.className} min-h-[100vh] `}>
           <Toast/>
           
           {children}
         </body>
-      </NextAuthProvider>
     </html>
   );
 }

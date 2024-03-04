@@ -2,12 +2,12 @@
 import React from "react";
 import { redirect } from "next/navigation";
 import LogInSignIn from "@/components/auth/LogInSignIn";
-import { getAuthSession } from "../api/auth/[...nextauth]/route";
+import { auth } from "@/auth";
 
 type Props = {};
 
 const SignIn = async (props: Props) => {
-  const session = await getAuthSession();
+  const session = await auth();
 
   if (session) {
     redirect("/dashboard");

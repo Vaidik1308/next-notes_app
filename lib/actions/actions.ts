@@ -2,12 +2,12 @@
 import prisma from "@/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { getAuthSession } from "@/app/api/auth/[...nextauth]/route";
-import { NoteBody, NoteData } from "@/types";
+import { NoteBody } from "@/types";
+import { auth } from "@/auth";
 
 export const getNotes = async () => {
   // "use server"
-  const session = await getAuthSession();
+  const session = await auth();
   try {
     const notes = await prisma.note.findMany({
       where: {

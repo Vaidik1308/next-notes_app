@@ -1,4 +1,4 @@
-import { Blog, Tag } from '@/types'
+import { Blog } from '@/types'
 import { relativeDate } from '@/utils'
 import { ArrowRightIcon } from 'lucide-react'
 import Image from 'next/image'
@@ -6,8 +6,8 @@ import Link from 'next/link'
 import React from 'react'
 import Markdown from 'react-markdown'
 import LikesComp from '../Likes/LikesComp'
-import { getAuthSession } from '@/app/api/auth/[...nextauth]/route'
 import { getTags } from '@/lib/data'
+import { auth } from '@/auth'
 
 type Props = Blog & {
     authorName:string;
@@ -23,7 +23,7 @@ const SingleBlogUI = async ({title,content,id,createdAt,updatedAt,tagsIds,author
 
     const slicedTag = blogTags.slice(0,2)
 
-    const session = await getAuthSession()
+    const session = await auth()
 
     if(!session){
         throw new Error("unauthenticated! please log in")
