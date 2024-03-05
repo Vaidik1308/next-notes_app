@@ -64,7 +64,7 @@ export const updateNote = async (formData: FormData) => {
 };
 
 export const addNote = async (formData: FormData) => {
-  const session = await getAuthSession();
+  const session = await auth();
   const authorEmail = (await session?.user?.email) as string;
   const rawData = {
     content: formData.get("content") as string,
@@ -143,7 +143,23 @@ export const AddTaskAction = async(values:z.infer<typeof taskSchema>) => {
         isCompleted
       }
     })
-  return {success:"Created Successfully"}
+    revalidatePath("/dashboard/tasks")
+    return {success:"Created Successfully"}
+  }catch(error){
+    console.log(error);
+    
+  }
+}
+
+
+export const deleteTask  = async (id:string) => {
+  try {
+    await prisma.task.delete({
+      where:{
+        id
+      }
+    })
+    revalidatePath("/dashboard/tasks")
   }catch(error){
     console.log(error);
     

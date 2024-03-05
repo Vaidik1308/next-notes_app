@@ -1,3 +1,4 @@
+import { AddTaskComp } from "@/components/task/AddTaskComp";
 import TaskContainer from "@/components/task/TaskContainer/TaskContainer";
 import React from "react";
 
@@ -10,6 +11,9 @@ const Task = (props: Props) => {
     </div>
     <div>
       <TaskContainer/>
+    </div>
+    <div className="absolute z-10 bottom-10 right-10">
+      <AddTaskComp/>
     </div>
   </div>;
 };

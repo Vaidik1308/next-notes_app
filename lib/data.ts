@@ -1,4 +1,6 @@
-import { Tag } from "@/types";
+import { auth } from "@/auth";
+import prisma from "@/prisma";
+import { Tag, Task } from "@/types";
 
 export const getAllBlogs = async () => {
     try{
@@ -21,3 +23,16 @@ export const getTags = async () => {
     const tags = (await res.json()) as Tag[];
     return tags;
   };
+
+
+//task Data
+export const getTasks = async () => {
+    const session = await auth()
+    const res = await prisma.task.findMany({
+        where:{
+            authorEmail:session?.user?.email as string
+        }
+    })
+    
+    return res as Task[]
+}

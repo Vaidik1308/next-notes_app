@@ -1,4 +1,5 @@
-import { getAuthSession } from "@/app/api/auth/[...nextauth]/route";
+
+import { auth } from "@/auth";
 import { Blog, Tag } from "@/types";
 import { relativeDate } from "@/utils";
 import Image from "next/image";
@@ -34,7 +35,7 @@ const SingleBlog = async ({
   const slicedTag = blogTags.slice(0,2)
   // console.log(slicedTag);
 
-  const session = await getAuthSession();
+  const session = await auth();
   const imageUrl = await session?.user?.image;
   return (
     <section className="flex  justify-start gap-1.5 bg-white rounded-[10px] overflow-hidden  h-[230px] w-[600px]  shadow-lg p-1">

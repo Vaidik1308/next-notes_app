@@ -4,14 +4,14 @@ import { GiNotebook } from "react-icons/gi";
 import { BiPlus } from "react-icons/bi";
 import Link from "next/link";
 import { Blog } from "@/types";
-import { getAuthSession } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { relativeDate } from "@/utils";
 import Image from "next/image";
+import { auth } from "@/auth";
 
 const getAllBlogs = async (email:string):Promise<Blog[]> => {
   try{
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/author/blogs/${email}`)
+    const res = await fetch(`http://localhost:3000/api/author/blogs/${email}`)
     const blogs = await res.json()
     
     return blogs
@@ -23,13 +23,12 @@ const getAllBlogs = async (email:string):Promise<Blog[]> => {
 }
 
 const BlogsPage = async () => {
-  const session = await getAuthSession();
+  const session = await auth();
   if (!session) {
     redirect("/sign-in");
   }
   const authorEmail = await session.user?.email as string
-  const blogs = await getAllBlogs(authorEmail) as Blog[]
-
+  const blogs:Blog[] = await getAllBlogs(authorEmail) 
 
   
 

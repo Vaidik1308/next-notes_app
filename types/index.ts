@@ -33,7 +33,7 @@ export type Blog = {
 };
 
 export type Task = {
-  id?: string;
+  id: string;
   title: string;
   content: string;
   createdAt: Date ;

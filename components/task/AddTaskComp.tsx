@@ -12,7 +12,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Edit3 } from "lucide-react"
+import { Edit3, Plus } from "lucide-react"
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { useForm } from "react-hook-form";
@@ -22,7 +22,7 @@ import { Switch } from "../ui/switch";
 import { AddTaskAction } from "@/lib/actions/actions";
 import { useRouter } from "next/navigation";
 
-export function EditTaskComp() {
+export function AddTaskComp() {
   const [error,setError] = useState<string | undefined>("")
   const [success,setSuccess] = useState<string | undefined>("")
   const [isPending, startTransition] = useTransition();
@@ -65,15 +65,15 @@ export function EditTaskComp() {
   return (
     <Dialog open={open} onOpenChange={setOpen} >
       <DialogTrigger asChild>
-        <Button className="h-8 w-12 " variant="secondary">
-          <Edit3 size={12}/>
+        <Button className="size-20 rounded-full " variant="secondary">
+          <Plus size={24}/>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] border-none bg-zinc-600 text-white">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>Add Task</DialogTitle>
           <DialogDescription className="text-gray-300">
-            {"Make changes to your profile here. Click save when you're done."}
+            {"Write your day to day tasks such as office meet, google meet, take medicines,etc"}
           </DialogDescription>
         </DialogHeader>
         <Form  {...form}>
