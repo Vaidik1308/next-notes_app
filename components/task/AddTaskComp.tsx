@@ -21,6 +21,7 @@ import { useEffect, useState, useTransition } from "react";
 import { Switch } from "../ui/switch";
 import { AddTaskAction } from "@/lib/actions/actions";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export function AddTaskComp() {
   const [error,setError] = useState<string | undefined>("")
@@ -56,6 +57,8 @@ export function AddTaskComp() {
       .then((data) => { // here we are calling our action
           setError(data?.error); //action is returning object containing  error and success messages 
           setSuccess(data?.success);
+          if (data?.success)  toast.success(data?.success)
+          if(data?.error) toast.error(data?.error)
           router.refresh()
       })
   })

@@ -19,10 +19,21 @@ import { useForm } from "react-hook-form";
 import { taskSchema } from "@/lib/schemas/FormSchema";
 import { useEffect, useState, useTransition } from "react";
 import { Switch } from "../ui/switch";
-import { AddTaskAction } from "@/lib/actions/actions";
+import { AddTaskAction, editTask } from "@/lib/actions/actions";
 import { useRouter } from "next/navigation";
+import { getTaskById } from "@/lib/data";
+import { Task } from "@/types";
+import toast from "react-hot-toast";
+import { revalidatePath } from "next/cache";
 
-export function EditTaskComp() {
+
+export  function EditTaskComp({id,
+  title,
+  content,
+  isCompleted,
+  createdAt,
+  updatedAt,
+  authorEmail}:Task) {
   const [error,setError] = useState<string | undefined>("")
   const [success,setSuccess] = useState<string | undefined>("")
   const [isPending, startTransition] = useTransition();
@@ -33,34 +44,42 @@ export function EditTaskComp() {
   const form  =  useForm<z.infer<typeof taskSchema>>({
     resolver:zodResolver(taskSchema),
     defaultValues:{
-      title:"",
-      content:"",
-      isCompleted:false,
+      title,
+      content,
+      isCompleted
       
     }
   })
 
-  useEffect(() => {
+  useEffect(  () => {
     if (!open) {
       form.reset();
     }
+
   }, [form, open]);
 
   const onSubmit = (values:z.infer<typeof taskSchema>) => {
     setError('')
     setSuccess('')
     setOpen(false)
-    console.log(values);
+    // console.log(values);
     startTransition(async () => {
-      AddTaskAction(values)
+      editTask(values,id)
       .then((data) => { // here we are calling our action
           setError(data?.error); //action is returning object containing  error and success messages 
           setSuccess(data?.success);
+          if (data?.success)  toast.success(data?.success)
+          if(data?.error) toast.error(data?.error)
+          // revalidatePath("/dashboard/tasks")
           router.refresh()
       })
   })
 
   }
+
+ 
+  // console.log(taskById);
+  
   
   return (
     <Dialog open={open} onOpenChange={setOpen} >
@@ -91,6 +110,7 @@ export function EditTaskComp() {
                       placeholder="title here...."
                       {...field}
                       disabled={isPending}
+                      // value={title}
                     />
                   </FormControl>
                   <FormMessage/>
@@ -110,6 +130,7 @@ export function EditTaskComp() {
                       placeholder="title here...."
                       {...field}
                       disabled={isPending}
+                      // value={content}
                       
                     />
                   </FormControl>
@@ -128,7 +149,6 @@ export function EditTaskComp() {
                       className="text-black"
                       checked={field.value}
                       onCheckedChange={field.onChange}
-                      
                     />
                   </FormControl>
                   <FormMessage />

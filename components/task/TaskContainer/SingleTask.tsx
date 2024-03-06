@@ -1,10 +1,12 @@
 'use client'
 import { IoTrashBinSharp } from "react-icons/io5";
 import { RiFileEditFill } from "react-icons/ri";
-import React from 'react'
+import React, { useTransition } from 'react'
 import { EditTaskComp } from "../EditTaskComp";
 import { Task } from "@/types";
 import { deleteTask } from "@/lib/actions/actions";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 type Props = Task
 
@@ -17,6 +19,19 @@ const SingleTask = ({
     updatedAt,
     authorEmail
 }: Props) => {
+    const [isPending, startTransition] = useTransition();
+    const router = useRouter()
+    const onDelete = () => {
+        startTransition(async () => {
+            deleteTask(id)
+            .then((data) => { // here we are calling our action
+                if (data?.success)  toast.success(data?.success)
+                if(data?.error) toast.error(data?.error)
+                // revalidatePath("/dashboard/tasks")
+                router.refresh()
+            })
+        })
+    }
   return (
     <div className='w-[95%] h-48 bg-zinc-600 text-white rounded-lg shadow-lg drop-shadow-2xl p-3 flex flex-col items-start justify-between'>
         <div className="w-full">
@@ -27,15 +42,23 @@ const SingleTask = ({
         </div>
         <div className="flex flex-col w-full justify-between gap-1">
             <p className="text-sm">
-                {createdAt.toDateString().toString().substring(0,16)}
+                { updatedAt.toDateString().toString().substring(0,16) || createdAt.toDateString().toString().substring(0,16)}
             </p>
             <div className="flex justify-between">
                 {/* <span className="bg-green-500 px-1.5 py-1 flex justify-center items-center rounded-md text-sm">Completed</span> */}
                 <span className={`${ isCompleted ? "bg-green-500" : "bg-red-500"} px-2.5 py-1 flex justify-center items-center rounded-md text-sm`}>{isCompleted ? "Completed" :"Incomplete"}</span>
                 {/* <span className="bg-red-500 px-1.5 py-1 flex justify-center items-center rounded-md text-sm">Incomplete</span> */}
                 <div className="flex gap-3">
-                    <EditTaskComp/>
-                    <button onClick={() =>deleteTask(id)}>
+                    <EditTaskComp
+                        id={id}
+                        title={title}
+                        content={content}
+                        isCompleted={isCompleted}
+                        createdAt={createdAt}
+                        updatedAt={updatedAt}
+                        authorEmail={authorEmail}
+                    />
+                    <button onClick={() =>onDelete()}>
                         <IoTrashBinSharp/>
                     </button>
                 </div>

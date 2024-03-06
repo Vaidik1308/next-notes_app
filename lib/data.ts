@@ -36,3 +36,19 @@ export const getTasks = async () => {
     
     return res as Task[]
 }
+
+
+//getTaskById
+export const getTaskById = async (id:string) => {
+    try{
+        const taskById = await prisma.task.findUnique({
+            where:{
+                id
+            }
+        })
+        return taskById as Task
+    }catch(error){
+        console.log(error);
+        
+    }
+}

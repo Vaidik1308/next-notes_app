@@ -144,10 +144,10 @@ export const AddTaskAction = async(values:z.infer<typeof taskSchema>) => {
       }
     })
     revalidatePath("/dashboard/tasks")
-    return {success:"Created Successfully"}
+    return {success:"Task Created Successfully"}
   }catch(error){
     console.log(error);
-    
+    return {error:"failed to create"}
   }
 }
 
@@ -160,6 +160,27 @@ export const deleteTask  = async (id:string) => {
       }
     })
     revalidatePath("/dashboard/tasks")
+    return {success : "delete successfully"}
+  }catch(error){
+    console.log(error);
+    return {error:"error in deleting"}
+    
+  }
+}
+
+export const editTask = async (data:z.infer<typeof taskSchema>,id:string) => {
+  const validateFields = taskSchema.safeParse(data);
+
+  if(!validateFields.success){
+    return {error:"invalid Fields"}
+  }
+  try{
+    await prisma.task.update({
+      where:{
+        id
+      },data
+    })
+    return {success: "changes saved successfully"}
   }catch(error){
     console.log(error);
     
