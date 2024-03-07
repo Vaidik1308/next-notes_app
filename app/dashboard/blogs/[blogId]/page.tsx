@@ -1,5 +1,5 @@
-// 'use client'
-import { getAuthSession } from "@/app/api/auth/[...nextauth]/route";
+
+import { auth } from "@/auth";
 import DeleteBtn from "@/components/DeleteBtn";
 import { Blog, Tag } from "@/types";
 import { relativeDate } from "@/utils";
@@ -30,7 +30,7 @@ const getSingleBlog = async (id:string) => {
 
 
 const BlogPage =  async ({params}:{params:{blogId:string}}) => {
-  const session = await getAuthSession();
+  const session = await auth();
 
   const blog:Blog = await getSingleBlog(params.blogId)
 

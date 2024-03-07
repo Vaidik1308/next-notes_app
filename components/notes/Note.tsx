@@ -45,7 +45,7 @@ const Note = ({ title, content, createdAt, bgColor, id,index }: Note) => {
       transition={{ease:"easeInOut",duration:0.4 * Number(index)}}
     >
       <section
-        className={` shadow-lg mb-8 note lg:w-[360px] xl:w-[260px] hover:animate-pulse transition px-3 py-1  h-fit min-h-[25vh] flex flex-col gap-2 rounded-[5px] ${bgColor}  text-black md:w-[270px] md-1:w-[95%] sm:w-[95%] w-[95%] 3xl:w-[360px] `}
+        className={`  shadow-lg mb-8 note lg:w-[360px] xl:w-[260px] hover:animate-pulse transition px-3 py-1  h-fit min-h-[25vh] flex flex-col gap-2 rounded-[5px] ${bgColor}  text-black md:w-[270px] md-1:w-[95%] sm:w-[95%] w-[95%] 3xl:w-[360px] `}
       >
         <div className="w-full flex justify-between items-center">
           <span className=" text-[0.8rem] text-gray-700">
@@ -79,8 +79,8 @@ const Note = ({ title, content, createdAt, bgColor, id,index }: Note) => {
           </h2>
 
           {/* //rich text editor */}
-          <p className=" text-[14px] w-[78%]">
-            {content.length > 100 ? `${content.substring(0, 100)}...` : content}
+          <p className=" text-[14px] w-[95%] line-clamp-4">
+            {content}
           </p>
         </Link>
       </section>

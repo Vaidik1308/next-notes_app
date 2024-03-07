@@ -5,7 +5,6 @@ import { Tag } from "@/types";
 import CreatableReactSelect from "react-select/creatable";
 import { Send } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
 import toast from "react-hot-toast";
 
 const CreateBlog = () => {

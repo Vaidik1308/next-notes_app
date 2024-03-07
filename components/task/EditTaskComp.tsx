@@ -25,6 +25,7 @@ import { getTaskById } from "@/lib/data";
 import { Task } from "@/types";
 import toast from "react-hot-toast";
 import { revalidatePath } from "next/cache";
+import { Textarea } from "../ui/textarea";
 
 
 export  function EditTaskComp({id,
@@ -124,7 +125,7 @@ export  function EditTaskComp({id,
                 <FormItem>
                   <FormLabel>Content</FormLabel>
                   <FormControl>
-                    <Input
+                    <Textarea
                       className="text-black"
                       autoFocus={false}
                       placeholder="title here...."

@@ -22,6 +22,7 @@ import { Switch } from "../ui/switch";
 import { AddTaskAction } from "@/lib/actions/actions";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { Textarea } from "../ui/textarea";
 
 export function AddTaskComp() {
   const [error,setError] = useState<string | undefined>("")
@@ -68,8 +69,8 @@ export function AddTaskComp() {
   return (
     <Dialog open={open} onOpenChange={setOpen} >
       <DialogTrigger asChild>
-        <Button className="size-20 rounded-full " variant="secondary">
-          <Plus size={24}/>
+        <Button className="size-20  rounded-full  " variant="secondary">
+          <Plus size={30}/>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] border-none bg-zinc-600 text-white">
@@ -107,10 +108,10 @@ export function AddTaskComp() {
                 <FormItem>
                   <FormLabel>Content</FormLabel>
                   <FormControl>
-                    <Input
+                    <Textarea
                       className="text-black"
                       autoFocus={false}
-                      placeholder="title here...."
+                      placeholder="content here...."
                       {...field}
                       disabled={isPending}
                       
